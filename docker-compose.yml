@@ -1,0 +1,10 @@
+version: '3.6'
+
+services:
+  server:
+    image: ${IMAGE_NAME:-localhost/echo-server-tcp}:${VERSION:-latest}
+    build: .
+    environment:
+      LISTEN_PORT: 9900
+    ports:
+      - "9900:9900"
