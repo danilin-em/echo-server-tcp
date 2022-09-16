@@ -4,6 +4,9 @@ services:
   server:
     image: ${IMAGE_NAME:-localhost/echo-server-tcp}:${VERSION:-latest}
     build: .
+    volumes:
+      - ./echo-server.php:/var/www/html/echo-server.php
+    command: php echo-server.php
     environment:
       LISTEN_PORT: 9900
     ports:
