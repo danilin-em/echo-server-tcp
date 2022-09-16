@@ -14,11 +14,9 @@ while (true) {
     if (($client = socket_accept($socket)) === false) {
         continue;
     }
-    $client_name = 'Unknown';
-    socket_getpeername($client, $client_name);
-    $input = socket_read($client, 1024);
-    echo $input . "\r\n";
-    if ($input === 'STOP') {
-        break;
-    }
+    $out = "\r\n ---------------------- \r\n";
+    $out .= socket_read($client, 1024 ** 2);
+    echo $out . "\r\n";
+    socket_write($client, "HTTP/1.1 200 OK\r\n");
+    socket_close($client);
 }
