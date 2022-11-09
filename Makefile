@@ -8,9 +8,8 @@ IMAGE_LATEST=$(IMAGE_NAME):latest
 IMAGE_VERSION=$(IMAGE_NAME):$(VERSION)
 
 build:
-	docker build -t $(IMAGE_LATEST) .
-	docker tag $(IMAGE_LATEST) $(IMAGE_VERSION)
-push: build
+	docker buildx build --platform linux/amd64,linux/arm64 --push -t $(IMAGE_LATEST) -t $(IMAGE_VERSION) .
+push:
 	docker push $(IMAGE_LATEST)
 	docker push $(IMAGE_VERSION)
 serve: build
